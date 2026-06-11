@@ -15,14 +15,20 @@ void rightAuton() {
 
   drive Chassis(3.25, 4.0/3, leftDrive, rightDrive, PORT1);
   intake Intake(intakeMotors);
-
-  Chassis.driveDistance(24, 1, 1, 0, 0.1);
+  
   Intake.startIntake();
-  Chassis.turnAngle(90);
-  Chassis.turnAngle(-90);
-  wait(2, sec);
+  Chassis.driveDistance(24, 1, 4, 4, 0);
+  Chassis.turnAngle(-90, 5 , 0.42, 0, 0);
   Intake.stopIntake();
-  Chassis.driveDistance(-24);
+  hoodPiston.set(false);
+
+  // Chassis.driveDistance(24, 1, 1, 0, 0.1);
+  // Intake.startIntake();
+  // Chassis.turnAngle(90);
+  // Chassis.turnAngle(-90);
+  // wait(2, sec);
+  // Intake.stopIntake();
+  // Chassis.driveDistance(-24);
 
 
 }

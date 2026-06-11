@@ -30,8 +30,9 @@ motor_group rightDrive(RF, RM, RB);
 motor Lift1(PORT1, gearSetting::ratio18_1, true); //Lift motor
 motor Lift2(PORT2, gearSetting::ratio18_1, true); //Lift motor
 
-digital_out DoubleActingPiston(Brain.ThreeWirePort.A);
-digital_out SingleActingPiston(Brain.ThreeWirePort.B);
+digital_out DoubleActingPiston(Brain.ThreeWirePort.E);
+digital_out SingleActingPiston(Brain.ThreeWirePort.F);
+digital_out hoodPiston(Brain.ThreeWirePort.B);
 
 motor intakeMotor(PORT14, ratio18_1, false);
 motor middleIntakeMotor(PORT13, ratio18_1, true);
@@ -49,5 +50,8 @@ void vexcodeInit() {
   SingleActingPiston.set(false); // off
   while (InertialSensor.isCalibrating()) {
     task::sleep(100);
+    
   }
+  Controller.Screen.print("InertialSensor Done Calibrating");
+  Controller.rumble(".-.-.-.-.-.");
 }

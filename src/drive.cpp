@@ -78,4 +78,6 @@ void drive::turnAngle(double angle, double tolerance, double kP, double kI, doub
         driveR.spin(reverse, turnTotal, percent);
         wait(turnPID.getUpdateTime(), msec);
     }
+
+    driveStop();
 }

@@ -35,6 +35,7 @@ extern vex::optical OpticalSensor;
 
 extern vex::digital_out DoubleActingPiston;
 extern vex::digital_out SingleActingPiston;
+extern vex::digital_out hoodPiston;
 
 void vexcodeInit();
 
