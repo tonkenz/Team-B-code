@@ -53,5 +53,5 @@ void vexcodeInit() {
     
   }
   Controller.Screen.print("InertialSensor Done Calibrating");
-  Controller.rumble(".-.-.-.-.-.");
+  Controller.rumble("..............-");
 }
