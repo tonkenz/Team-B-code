@@ -72,7 +72,7 @@ void autonomous(void) {
       break;
 
     default:
-      Brain.Screen.print("No valid auton selected!");
+      Brain.Screen.print("No selected");
       break;
   }
 
@@ -110,59 +110,94 @@ void usercontrol(void) {
   while (true) {
 
     // ========== DRIVE CONTROL ========== //
-    double fwd = Controller.Axis3.position(percent);
-    double turn = Controller.Axis1.position(percent);
+    double forward = Controller.Axis3.position() * 0.95; // forward/backward, change multiplier for sensitivity
+    double turn = Controller.Axis1.position() * 0.80;
 
-    double leftPower  = fwd + turn;
-    double rightPower = fwd - turn;
+    // Convert to voltage (+-12000 mV)
+    double leftVoltage = (forward + turn) * 125;
+    double rightVoltage = (forward - turn) * 125;
 
-    spinLeftDT(leftPower * DRIVER_SPEED_FACTOR);
-    spinRightDT(rightPower * DRIVER_SPEED_FACTOR);
+    // limmit :D
+    if (leftVoltage > 12000)
+        leftVoltage = 12000;
+    if (leftVoltage < -12000)
+        leftVoltage = -12000;
+    if (rightVoltage > 12000)
+        rightVoltage = 12000;
+    if (rightVoltage < -12000)
+        rightVoltage = -12000;
+        
+    // Drive motors (direction, side of dt, voltage units)
+    leftDrive.spin(vex::forward, leftVoltage, voltageUnits::mV);
+    rightDrive.spin(vex::forward, rightVoltage, voltageUnits::mV);
 
-    // ========== Lift CONTROL ========== //
-    // Hold down the R1 and R2 buttons to use the lift //
-    if (Controller.ButtonR1.pressing()) {
-      Lift1.spin(forward, 75, percent);
-      Lift2.spin(forward, 75, percent);
+    // if (Controller.ButtonA.pressing()){
+    //   intakeMotor.spin(forward, 80, percent);
+    //   middleIntakeMotor.spin(forward, 80, percent);
+    // }
+    // else if (Controller.ButtonB.pressing()){
+    //   intakeMotor.spin(reverse, 80, percent);
+    //   middleIntakeMotor.spin(reverse, 80, percent);
+    // }
+    // else {
+    //   intakeMotor.stop(hold);
+    //   middleIntakeMotor.stop(hold);
+    // }
+
+    // // ========== Lift CONTROL ========== //
+    // // Hold down the R1 and R2 buttons to use the lift //
+    if (Controller.ButtonL1.pressing()) {
+      Lift1.spin(vex::forward, 9000, voltageUnits::mV);
+      Lift2.spin(vex::forward, 9000, voltageUnits::mV);
     } 
-    else if (Controller.ButtonR2.pressing()) {
-      Lift1.spin(reverse, 75, percent);
-      Lift2.spin(reverse, 75, percent);
+    else if (Controller.ButtonL2.pressing()) {
+      Lift1.spin(vex::reverse, 9000, voltageUnits::mV);
+      Lift2.spin(vex::reverse, 9000, voltageUnits::mV);
     } 
     else {
       Lift1.stop(hold);
       Lift2.stop(hold);
     }
 
-    // ========== INTAKE ========== //
-    // Tap the L1 and L2 buttons to set the intake speed. Tap the same button again to stop //
-    if (Controller.ButtonL1.pressing() && intakeSpeed != 100 && !buttonL1Held) {
-      intakeMotor.spin(forward, 100, percent);
-      intakeSpeed = 100;
-      buttonL1Held = true;
-    } 
-    else if(Controller.ButtonL1.pressing() && intakeSpeed == 100 && !buttonL1Held) {
-      intakeMotor.stop(coast);
-      intakeSpeed = 0;
-      buttonL1Held = true;
-    }
-    else if (Controller.ButtonL2.pressing() && intakeSpeed != -100 && !buttonL2Held) {
-      intakeMotor.spin(reverse, 100, percent);
-      intakeSpeed = -100;
-      buttonL2Held = true;
-    } 
-    else if (Controller.ButtonL2.pressing() && intakeSpeed == -100 && !buttonL2Held){
-      intakeMotor.stop(coast);
-      intakeSpeed = 0;
-      buttonL2Held = true;
-    }
+    // // ========== INTAKE ========== //
 
-    if(!Controller.ButtonL1.pressing()) {
-      buttonL1Held = false;
+    if (Controller.ButtonR1.pressing()){
+      intakeMotor.spin(vex::forward, 12000, voltageUnits::mV);
     }
-    if(!Controller.ButtonL2.pressing()) {
-      buttonL2Held = false;
+    else if (Controller.ButtonR2.pressing()){
+      intakeMotor.spin(vex::reverse, 12000, voltageUnits::mV);
     }
+    else{
+      intakeMotor.stop(hold);
+    }
+    // // Tap the L1 and L2 buttons to set the intake speed. Tap the same button again to stop //
+    // if (Controller.ButtonL1.pressing() && intakeSpeed != 100 && !buttonL1Held) {
+    //   intakeMotor.spin(forward, 100, percent);
+    //   intakeSpeed = 100;
+    //   buttonL1Held = true;
+    // } 
+    // else if(Controller.ButtonL1.pressing() && intakeSpeed == 100 && !buttonL1Held) {
+    //   intakeMotor.stop(coast);
+    //   intakeSpeed = 0;
+    //   buttonL1Held = true;
+    // }
+    // else if (Controller.ButtonL2.pressing() && intakeSpeed != -100 && !buttonL2Held) {
+    //   intakeMotor.spin(reverse, 100, percent);
+    //   intakeSpeed = -100;
+    //   buttonL2Held = true;
+    // } 
+    // else if (Controller.ButtonL2.pressing() && intakeSpeed == -100 && !buttonL2Held){
+    //   intakeMotor.stop(coast);
+    //   intakeSpeed = 0;
+    //   buttonL2Held = true;
+    // }
+
+    // if(!Controller.ButtonL1.pressing()) {
+    //   buttonL1Held = false;
+    // }
+    // if(!Controller.ButtonL2.pressing()) {
+    //   buttonL2Held = false;
+    // }
  
     // ========== COLOR SENSOR ========== //
     color detectedColor = OpticalSensor.color();
@@ -187,13 +222,16 @@ void usercontrol(void) {
 
     // ========== PNEUMATICS ========== //
     // Use the X button to toggle the piston position //
-    if(Controller.ButtonX.pressing() && !buttonXHeld) {
+    if(Controller.ButtonX.PRESSED){
       DoubleActingPiston.set(!DoubleActingPiston.value());
-      buttonXHeld = true;
     }
-    else if(!Controller.ButtonX.pressing()) {
-      buttonXHeld = false;
-    }
+    // if(Controller.ButtonX.pressing() && !buttonXHeld) {
+    //   DoubleActingPiston.set(!DoubleActingPiston.value());
+    //   buttonXHeld = true;
+    // }
+    // else if(!Controller.ButtonX.pressing()) {
+    //   buttonXHeld = false;
+    // }
 
     // ========== LOOP DELAY ========== //
     wait(20, msec);
