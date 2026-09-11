@@ -8,6 +8,17 @@
 using namespace vex;
 
 void rightAuton() {
+  // toggle.spin(vex::forward, 9000, voltageUnits::mV);
+  // spinDT(100);
+  // wait(5, msec);
+  // spinDT(-100);
+  // wait(5, msec);
+  // spinDT(100);
+  // wait(5, msec);
+  // spinDT(-100);
+  // wait(5, msec);
+  // stopDT();
+
 
   // Controller.Screen.clearLine(3);
   // Controller.Screen.setCursor(3, 1);
@@ -20,7 +31,16 @@ void rightAuton() {
 }
 
 void leftAuton() {
-  
+  // toggle.spin(vex::forward, 9000, voltageUnits::mV);
+  // spinDT(100);
+  // wait(5, msec);
+  // spinDT(-100);
+  // wait(5, msec);
+  // spinDT(100);
+  // wait(5, msec);
+  // spinDT(-100);
+  // wait(5, msec);
+  // stopDT();
   //Use functions to create an auton for the left side of the field
 
 }

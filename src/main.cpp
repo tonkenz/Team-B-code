@@ -7,7 +7,8 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-
+#include <chrono>
+using namespace std::chrono;
 #include "vex.h"
 #include "robot-config.h"
 #include "PID.h"
@@ -19,9 +20,77 @@
 #include "intake.h"
 
 using namespace vex;
+using namespace std;
+
+steady_clock::time_point lastmlm = steady_clock::now();
+steady_clock::time_point lastclamp;
 
 // A global instance of competition
 competition Competition;
+
+
+bool mlmtrue = false;
+
+bool clamptrue = false;
+bool prevclamp = false;
+
+// away
+void mlmAway()
+{
+    DoubleActingPiston.set(false);
+}
+
+// use
+void mlmUse()
+{
+    DoubleActingPiston.set(true);
+}
+
+// use mlm
+/*void mlmControl()
+{
+    if (mlmtrue)
+    {
+        DoubleActingPiston.set(true);
+    }
+    else
+    {
+        DoubleActingPiston.set(false);
+    }
+}*/
+
+// mlm using one button
+/*void usingmlm()
+{
+    auto now = steady_clock::now();
+    auto durLastmlm = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastmlm).count();
+    if (durLastmlm > 200)
+    {
+        mlmControl();
+        mlmtrue = !mlmtrue;
+        lastmlm = now;
+    }
+}*/
+
+void clampcontrol() {
+  if (clamptrue) {
+   mlmUse();
+  } else {
+   mlmAway();
+  }
+ }
+
+ void loading() {
+  auto now = steady_clock::now();
+  auto durlastloading = duration_cast<milliseconds>(now-lastclamp).count();
+  if (durlastloading > 100) {
+    clampcontrol();
+    clamptrue = !clamptrue;
+    lastclamp = now;
+  }
+ }
+
+
 
 
 /*---------------------------------------------------------------------------*/
@@ -105,7 +174,6 @@ bool buttonXHeld = false;
 void usercontrol(void) {
 
   bool slowModeActive = false;
-  const double DRIVER_SPEED_FACTOR = 0.6; //can adjust your driver speed here
 
   while (true) {
 
@@ -144,6 +212,13 @@ void usercontrol(void) {
     //   middleIntakeMotor.stop(hold);
     // }
 
+    // // ========== TOGGLE ==========//
+    if (Controller.ButtonY.pressing()){
+      toggle.spin(vex::forward, 9000, voltageUnits::mV);
+    }
+    else{
+      toggle.stop(hold);
+    }
     // // ========== Lift CONTROL ========== //
     // // Hold down the R1 and R2 buttons to use the lift //
     if (Controller.ButtonL1.pressing()) {
@@ -200,7 +275,7 @@ void usercontrol(void) {
     // }
  
     // ========== COLOR SENSOR ========== //
-    color detectedColor = OpticalSensor.color();
+    // color detectedColor = OpticalSensor.color();
 
     /*if (detectedColor == color::blue) {
       Brain.Screen.printAt(50, 50, "Blue Detected!");
@@ -214,24 +289,24 @@ void usercontrol(void) {
       Brain.Screen.printAt(50, 50, "No specific color detected.");
     }*/
 
-    double hue = OpticalSensor.hue();
-    double brightness = OpticalSensor.brightness();
-    Brain.Screen.printAt(50, 70, "Hue: %.2f", hue);
-    Brain.Screen.printAt(50, 90, "Brightness: %.2f", brightness);
-    Brain.Screen.clearScreen();
+    // double hue = OpticalSensor.hue();
+    // double brightness = OpticalSensor.brightness();
+    // Brain.Screen.printAt(50, 70, "Hue: %.2f", hue);
+    // Brain.Screen.printAt(50, 90, "Brightness: %.2f", brightness);
+    // Brain.Screen.clearScreen();
 
     // ========== PNEUMATICS ========== //
-    // Use the X button to toggle the piston position //
-    if(Controller.ButtonX.PRESSED){
-      DoubleActingPiston.set(!DoubleActingPiston.value());
-    }
-    // if(Controller.ButtonX.pressing() && !buttonXHeld) {
+    // // Use the X button to toggle the piston position //
+    // if(Controller.ButtonX.PRESSED){
     //   DoubleActingPiston.set(!DoubleActingPiston.value());
-    //   buttonXHeld = true;
     // }
-    // else if(!Controller.ButtonX.pressing()) {
-    //   buttonXHeld = false;
+    // if(Controller.ButtonX.pressing()) {
+    //   usingmlm();
     // }
+
+    Controller.ButtonX.pressed(clampcontrol);
+    Controller.ButtonX.released(loading);
+
 
     // ========== LOOP DELAY ========== //
     wait(20, msec);

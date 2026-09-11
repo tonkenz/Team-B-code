@@ -17,18 +17,18 @@ using namespace vex;
 brain Brain;
 controller Controller(controllerType::primary);
 // motor LB(PORT6, ratio6_1, true); //Left Back Motor
-motor LM(PORT5, ratio6_1, true); //Left Middle Motor
+motor LM(PORT3, ratio6_1, true); //Left Middle Motor
 motor LF(PORT4, ratio6_1, true); //Left Front Motor
 // motor RB(PORT1, ratio6_1, false); //Right Back Motor
-motor RM(PORT2, ratio6_1, false); //Right Middle Motor
-motor RF(PORT3, ratio6_1, false); //Right Front Motor
+motor RM(PORT1, ratio6_1, false); //Right Middle Motor
+motor RF(PORT2, ratio6_1, false); //Right Front Motor
 
 
-motor_group leftDrive(LF, LM, LB);
-motor_group rightDrive(RF, RM, RB);
+motor_group leftDrive(LF, LM);
+motor_group rightDrive(RF, RM);
 
-motor Lift1(PORT10, gearSetting::ratio18_1, true); //Lift motor
-motor Lift2(PORT11, gearSetting::ratio18_1, true); //Lift motor
+motor Lift1(PORT5, gearSetting::ratio18_1, true); //Lift motor
+motor Lift2(PORT6, gearSetting::ratio18_1, false); //Lift motor
 
 digital_out DoubleActingPiston(Brain.ThreeWirePort.A);
 digital_out SingleActingPiston(Brain.ThreeWirePort.B);
@@ -39,9 +39,11 @@ motor intakeMotor(PORT14, ratio18_1, false);
 
 // motor_group intakeMotors(intakeMotor, middleIntakeMotor, bottomIntakeMotor);
 
-inertial InertialSensor(PORT7);
+inertial InertialSensor(PORT20);
 
-optical OpticalSensor(PORT21);
+motor toggle(PORT8);
+
+// optical OpticalSensor(PORT21);
 
 void vexcodeInit() {
   InertialSensor.calibrate();
