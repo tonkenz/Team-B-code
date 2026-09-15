@@ -22,42 +22,24 @@ using namespace std::chrono;
 using namespace vex;
 using namespace std;
 
-steady_clock::time_point lastmlm = steady_clock::now();
-steady_clock::time_point lastclamp;
-
 // A global instance of competition
 competition Competition;
 
 
-bool mlmtrue = false;
 
-bool clamptrue = false;
-bool prevclamp = false;
 
-// away
-void mlmAway()
-{
-    DoubleActingPiston.set(false);
-}
-
-// use
-void mlmUse()
-{
-    DoubleActingPiston.set(true);
-}
-
-// use mlm
-/*void mlmControl()
-{
-    if (mlmtrue)
-    {
-        DoubleActingPiston.set(true);
-    }
-    else
-    {
-        DoubleActingPiston.set(false);
-    }
-}*/
+//  //use mlm
+// void mlmControl()
+// {
+//     if (mlmtrue)
+//     {
+//         DoubleActingPiston.set(true);
+//     }
+//     else
+//     {
+//         DoubleActingPiston.set(false);
+//     }
+// }
 
 // mlm using one button
 /*void usingmlm()
@@ -72,23 +54,23 @@ void mlmUse()
     }
 }*/
 
-void clampcontrol() {
-  if (clamptrue) {
-   mlmUse();
-  } else {
-   mlmAway();
-  }
- }
+// void clampcontrol() {
+//   if (clamptrue) {
+//    mlmUse();
+//   } else {
+//    mlmAway();
+//   }
+//  }
 
- void loading() {
-  auto now = steady_clock::now();
-  auto durlastloading = duration_cast<milliseconds>(now-lastclamp).count();
-  if (durlastloading > 100) {
-    clampcontrol();
-    clamptrue = !clamptrue;
-    lastclamp = now;
-  }
- }
+//  void loading() {
+//   auto now = steady_clock::now();
+//   auto durlastloading = duration_cast<milliseconds>(now-lastclamp).count();
+//   if (durlastloading > 100) {
+//     clampcontrol();
+//     clamptrue = !clamptrue;
+//     lastclamp = now;
+//   }
+//  }
 
 
 
@@ -304,8 +286,8 @@ void usercontrol(void) {
     //   usingmlm();
     // }
 
-    Controller.ButtonX.pressed(clampcontrol);
-    Controller.ButtonX.released(loading);
+    // Controller.ButtonX.pressed(clampcontrol);
+    // Controller.ButtonX.released(loading);
 
 
     // ========== LOOP DELAY ========== //
