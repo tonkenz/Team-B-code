@@ -55,7 +55,7 @@ void turnForTime(double velocity, double time) {
     stopDT();
 } 
 
-void runIntake(){
+/*void runIntake(){
     intakeMotor.spin(forward, 100, percent);
 }
 
@@ -65,4 +65,4 @@ void runOutake(){
 
 void stopIntake(){
     intakeMotor.stop(coast);
-}
+}*/

@@ -150,18 +150,26 @@ double intakeSpeed = 0;
 bool buttonL1Held = false;
 bool buttonL2Held = false;
 
-bool buttonXHeld = false;
+bool buttonAHeld = false;
 
 // User control function
 void usercontrol(void) {
-
   bool slowModeActive = false;
 
   while (true) {
 
     // ========== DRIVE CONTROL ========== //
-    double forward = Controller.Axis3.position() * 0.95; // forward/backward, change multiplier for sensitivity
-    double turn = Controller.Axis1.position() * 0.80;
+    //arcade drive control
+    // double forward = Controller.Axis3.position() * 1; // forward/backward, change multiplier for sensitivity
+    // double turn = Controller.Axis1.position() * 1;
+    
+    // tank drive control
+    // double forward = (Controller.Axis3.position() + Controller.Axis2.position()) / 2; // forward/backward, change multiplier for sensitivity
+    // double turn = (Controller.Axis3.position() - Controller.Axis2.position()) / 2; // turning, change multiplier for sensitivity
+
+    //single stick drive control
+    double forward = Controller.Axis3.position() * 1; // forward/backward, change multiplier for sensitivity
+    double turn = Controller.Axis4.position() * 1; 
 
     // Convert to voltage (+-12000 mV)
     double leftVoltage = (forward + turn) * 125;
@@ -195,12 +203,12 @@ void usercontrol(void) {
     // }
 
     // // ========== TOGGLE ==========//
-    if (Controller.ButtonY.pressing()){
-      toggle.spin(vex::forward, 9000, voltageUnits::mV);
-    }
-    else{
-      toggle.stop(hold);
-    }
+    // if (Controller.ButtonY.pressing()){
+    //   toggle.spin(vex::forward, 9000, voltageUnits::mV);
+    // }
+    // else{
+    //   toggle.stop(hold);
+    // }
     // // ========== Lift CONTROL ========== //
     // // Hold down the R1 and R2 buttons to use the lift //
     if (Controller.ButtonL1.pressing()) {
@@ -218,15 +226,15 @@ void usercontrol(void) {
 
     // // ========== INTAKE ========== //
 
-    if (Controller.ButtonR1.pressing()){
-      intakeMotor.spin(vex::forward, 12000, voltageUnits::mV);
-    }
-    else if (Controller.ButtonR2.pressing()){
-      intakeMotor.spin(vex::reverse, 12000, voltageUnits::mV);
-    }
-    else{
-      intakeMotor.stop(hold);
-    }
+    // if (Controller.ButtonR1.pressing()){
+    //   intakeMotor.spin(vex::forward, 12000, voltageUnits::mV);
+    // }
+    // else if (Controller.ButtonR2.pressing()){
+    //   intakeMotor.spin(vex::reverse, 12000, voltageUnits::mV);
+    // }
+    // else{
+    //   intakeMotor.stop(hold);
+    // }
     // // Tap the L1 and L2 buttons to set the intake speed. Tap the same button again to stop //
     // if (Controller.ButtonL1.pressing() && intakeSpeed != 100 && !buttonL1Held) {
     //   intakeMotor.spin(forward, 100, percent);
@@ -278,7 +286,14 @@ void usercontrol(void) {
     // Brain.Screen.clearScreen();
 
     // ========== PNEUMATICS ========== //
-    // // Use the X button to toggle the piston position //
+    // Use the X button to toggle the piston position //
+    if (Controller.ButtonA.pressing() && !buttonAHeld) {
+      DoubleActingPiston.set(!DoubleActingPiston.value());
+      buttonAHeld = true;
+    } 
+    else if (!Controller.ButtonA.pressing()) {
+      buttonAHeld = false;
+    }
     // if(Controller.ButtonX.PRESSED){
     //   DoubleActingPiston.set(!DoubleActingPiston.value());
     // }

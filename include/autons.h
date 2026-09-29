@@ -4,7 +4,7 @@
 #include "intake.h"
 
 extern drive Chassis;
-extern intake Intake;
+// extern intake Intake;
 
 //Autons//
 void rightAuton();
