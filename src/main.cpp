@@ -160,16 +160,16 @@ void usercontrol(void) {
 
     // ========== DRIVE CONTROL ========== //
     //arcade drive control
-    // double forward = Controller.Axis3.position() * 1; // forward/backward, change multiplier for sensitivity
-    // double turn = Controller.Axis1.position() * 1;
+    double forward = Controller.Axis3.position() * 1; // forward/backward, change multiplier for sensitivity
+    double turn = Controller.Axis1.position() * 1;
     
     // tank drive control
     // double forward = (Controller.Axis3.position() + Controller.Axis2.position()) / 2; // forward/backward, change multiplier for sensitivity
     // double turn = (Controller.Axis3.position() - Controller.Axis2.position()) / 2; // turning, change multiplier for sensitivity
 
     //single stick drive control
-    double forward = Controller.Axis3.position() * 1; // forward/backward, change multiplier for sensitivity
-    double turn = Controller.Axis4.position() * 1; 
+    // double forward = Controller.Axis3.position() * 1; // forward/backward, change multiplier for sensitivity
+    // double turn = Controller.Axis4.position() * 1; 
 
     // Convert to voltage (+-12000 mV)
     double leftVoltage = (forward + turn) * 125;
@@ -288,7 +288,7 @@ void usercontrol(void) {
     // ========== PNEUMATICS ========== //
     // Use the X button to toggle the piston position //
     if (Controller.ButtonA.pressing() && !buttonAHeld) {
-      DoubleActingPiston.set(!DoubleActingPiston.value());
+      ClawPiston.set(!ClawPiston.value());
       buttonAHeld = true;
     } 
     else if (!Controller.ButtonA.pressing()) {

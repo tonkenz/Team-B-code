@@ -16,20 +16,20 @@ using namespace vex;
 
 brain Brain;
 controller Controller(controllerType::primary);
-motor LB(PORT4, ratio6_1, true); //Left Back Motor
-motor LM(PORT1, ratio6_1, true); //Left Middle Motor
-motor LF(PORT4, ratio6_1, true); //Left Front Motor
-motor RB(PORT3, ratio6_1, false); //Right Back Motor
-motor RM(PORT2, ratio6_1, false); //Right Middle Motor
-motor RF(PORT2, ratio6_1, false); //Right Front Motor
+motor LB(PORT15, ratio6_1, true); //Left Back Motor
+motor LM(PORT16, ratio6_1, true); //Left Middle Motor
+motor LF(PORT17, ratio6_1, true); //Left Front Motor
+motor RB(PORT13, ratio6_1, false); //Right Back Motor
+motor RM(PORT12, ratio6_1, false); //Right Middle Motor
+motor RF(PORT11, ratio6_1, false); //Right Front Motor
 
 
 motor_group leftDrive(LB, LM, LF);
 motor_group rightDrive(RB, RM, RF);
 
 
-motor Lift1(PORT5, gearSetting::ratio18_1, true); //Lift motor
-motor Lift2(PORT6, gearSetting::ratio18_1, false); //Lift motor
+motor Lift1(PORT2, gearSetting::ratio18_1, true); //Lift motor
+motor Lift2(PORT1, gearSetting::ratio18_1, false); //Lift motor
 
 digital_out ClawPiston(Brain.ThreeWirePort.A);
 digital_out SingleActingPiston(Brain.ThreeWirePort.B);
@@ -40,7 +40,7 @@ digital_out SingleActingPiston(Brain.ThreeWirePort.B);
 
 // motor_group intakeMotors(intakeMotor, middleIntakeMotor, bottomIntakeMotor);
 
-inertial InertialSensor(PORT20);
+inertial InertialSensor(PORT10);
 
 motor toggle(PORT8);
 
