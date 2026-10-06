@@ -172,8 +172,8 @@ void usercontrol(void) {
     // double turn = Controller.Axis4.position() * 1; 
 
     // Convert to voltage (+-12000 mV)
-    double leftVoltage = (forward + turn) * 125;
-    double rightVoltage = (forward - turn) * 125;
+    double leftVoltage = (forward + turn) * 100;
+    double rightVoltage = (forward - turn) * 100;
 
     // limmit :D
     if (leftVoltage > 12000)
@@ -329,9 +329,4 @@ int main() {
     wait(100, msec);
   }
 }
-
-
-
-
-
 
