@@ -211,11 +211,11 @@ void usercontrol(void) {
     // }
     // // ========== Lift CONTROL ========== //
     // // Hold down the R1 and R2 buttons to use the lift //
-    if (Controller.ButtonL1.pressing()) {
+    if (Controller.ButtonL2.pressing()) {
       Lift1.spin(vex::forward, 9000, voltageUnits::mV);
       Lift2.spin(vex::forward, 9000, voltageUnits::mV);
     } 
-    else if (Controller.ButtonL2.pressing()) {
+    else if (Controller.ButtonL1.pressing()) {
       Lift1.spin(vex::reverse, 9000, voltageUnits::mV);
       Lift2.spin(vex::reverse, 9000, voltageUnits::mV);
     } 
@@ -287,11 +287,11 @@ void usercontrol(void) {
 
     // ========== PNEUMATICS ========== //
     // Use the X button to toggle the piston position //
-    if (Controller.ButtonA.pressing() && !buttonAHeld) {
+    if (Controller.ButtonB.pressing() && !buttonAHeld) {
       ClawPiston.set(!ClawPiston.value());
       buttonAHeld = true;
     } 
-    else if (!Controller.ButtonA.pressing()) {
+    else if (!Controller.ButtonB.pressing()) {
       buttonAHeld = false;
     }
     // if(Controller.ButtonX.PRESSED){
