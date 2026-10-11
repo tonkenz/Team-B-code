@@ -147,10 +147,7 @@ bool inauton = false;
 
 //Variables used in driver control
 double intakeSpeed = 0;
-bool buttonL1Held = false;
-bool buttonL2Held = false;
-
-bool buttonAHeld = false;
+bool buttonR1pressed = false;
 
 // User control function
 void usercontrol(void) {
@@ -224,6 +221,13 @@ void usercontrol(void) {
       Lift2.stop(hold);
     }
 
+    if (Controller.ButtonA.pressing()){
+      ClawPiston.set(true);
+    }
+    else if (Controller.ButtonB.pressing()){
+      ClawPiston.set(false);
+    }
+
     // // ========== INTAKE ========== //
 
     // if (Controller.ButtonR1.pressing()){
@@ -287,13 +291,13 @@ void usercontrol(void) {
 
     // ========== PNEUMATICS ========== //
     // Use the X button to toggle the piston position //
-    if (Controller.ButtonB.pressing() && !buttonAHeld) {
-      ClawPiston.set(!ClawPiston.value());
-      buttonAHeld = true;
-    } 
-    else if (!Controller.ButtonB.pressing()) {
-      buttonAHeld = false;
-    }
+    // if (Controller.ButtonR1.pressing() && !buttonR1pressed) {
+    //   ClawPiston.set(!ClawPiston.value());
+    //   buttonR1pressed = true;
+    // } 
+    // else if (!Controller.ButtonR1.pressing()) {
+    //   buttonR1pressed = false;
+    // } 
     // if(Controller.ButtonX.PRESSED){
     //   DoubleActingPiston.set(!DoubleActingPiston.value());
     // }

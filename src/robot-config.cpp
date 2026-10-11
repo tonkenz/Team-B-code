@@ -40,7 +40,7 @@ digital_out SingleActingPiston(Brain.ThreeWirePort.B);
 
 // motor_group intakeMotors(intakeMotor, middleIntakeMotor, bottomIntakeMotor);
 
-// inertial InertialSensor(PORT10);
+inertial InertialSensor(PORT10);
 
 motor toggle(PORT8);
 
