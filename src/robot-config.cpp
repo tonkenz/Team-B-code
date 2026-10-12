@@ -26,6 +26,7 @@ motor RF(PORT11, ratio6_1, false); //Right Front Motor
 
 motor_group leftDrive(LB, LM, LF);
 motor_group rightDrive(RB, RM, RF);
+motor_group LiftMotors(Lift1, Lift2);
 
 
 motor Lift1(PORT10, gearSetting::ratio6_1, true); //Lift motor
@@ -40,7 +41,7 @@ digital_out SingleActingPiston(Brain.ThreeWirePort.B);
 
 // motor_group intakeMotors(intakeMotor, middleIntakeMotor, bottomIntakeMotor);
 
-inertial InertialSensor(PORT10);
+inertial InertialSensor(PORT14);
 
 motor toggle(PORT8);
 

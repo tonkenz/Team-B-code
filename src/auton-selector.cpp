@@ -28,7 +28,7 @@ void autonSelector::chooseAuton() {
 
   while (true) {
 
-    if(Controller.ButtonA.pressing()) {
+    if(Controller.ButtonY.pressing()) {
       break;
     }
   

@@ -27,10 +27,10 @@ class drive {
         vex::motor_group driveR;
         vex::inertial Inertial;
 
-        drive(double WheelDiameter, double GearRatio, vex::motor_group DriveL, vex::motor_group DriveR, int inertialPort);
+        drive(double WheelDiameter, double GearRatio, vex::motor_group DriveL, vex::motor_group DriveR, vex::motor_group LiftMotors, int inertialPort);
 
         //Start angle should be given relative to the vertical side of the field, increasing clockwise (same as Inertial heading)
-        drive(double WheelDiameter, double GearRatio, double startX, double startY, double startAngle, vex::motor_group DriveL, vex::motor_group DriveR, int inertialPort);
+        drive(double WheelDiameter, double GearRatio, double startX, double startY, double startAngle, vex::motor_group DriveL, vex::motor_group DriveR, vex::motor_group LiftMotors, int inertialPort);
 
         void driveStop();
 

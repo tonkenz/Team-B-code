@@ -6,13 +6,13 @@
 
 using namespace vex;
 
-drive::drive(double WheelDiameter, double GearRatio, vex::motor_group driveLeft, vex::motor_group driveRight, int inertialPort) :
+drive::drive(double WheelDiameter, double GearRatio, vex::motor_group driveLeft, vex::motor_group driveRight, vex::motor_group LiftMotors, int inertialPort) :
 driveL(driveLeft), driveR(driveRight), Inertial(inertialPort) {
     wheelDiameter = WheelDiameter;
     gearRatio = GearRatio;
 }
 
-drive::drive(double WheelDiameter, double GearRatio, double startX, double startY, double startAngle, vex::motor_group driveLeft, vex::motor_group driveRight, int inertialPort) :
+drive::drive(double WheelDiameter, double GearRatio, double startX, double startY, double startAngle, vex::motor_group driveLeft, vex::motor_group driveRight, vex::motor_group LiftMotors, int inertialPort) :
 driveL(driveLeft), driveR(driveRight), Inertial(inertialPort) {
     wheelDiameter = WheelDiameter;
     gearRatio = GearRatio;

@@ -7,14 +7,25 @@
 #include "drive.h"
 
 using namespace vex;
-
+//tuned PID
+//Chassis.driveDistance(24, 0.1, 6, 0.001, 0.05);
+//Chassis.driveDistance(-24, 0.1, 8.5, 0.001, 0.05);
+//Chassis.turnAngle(180, 0.25, 0.6, 0.001, 0.05);
 void rightAuton() {
   //ten point
-    // drive Chassis(3.25, 4.0/3, leftDrive, rightDrive, PORT1);
-  // Chassis.driveDistance(-5, 0.25, 0.5, 0.01, 0.05);
-  // Chassis.driveDistance(6, 0.25, 0.5, 0.01, 0.05);
-  // Chassis.driveDistance(-7, 0.25, 0.5, 0.01, 0.05);
-  // Chassis.driveDistance(8, 0.25, 0.5, 0.01, 0.05);
+    drive Chassis(3.25, 4.0/3, leftDrive, rightDrive, LiftMotors, PORT14);
+    lift lift(PORT10, PORT1, Brain.ThreeWirePort.H);
+    Chassis.driveDistance(4, 0.1, 6, 0.001, 0.05);
+    Chassis.driveDistance(-5, 0.1, 6, 0.001, 0.05);
+    Chassis.driveDistance(5, 0.1, 6, 0.001, 0.05);
+    Chassis.driveDistance(-15, 0.1, 6, 0.001, 0.05);
+    Chassis.turnAngle(-90, 0.5, 0.6, 0.001, 0.05);
+    LiftMotors.setVelocity(100, percent);
+    LiftMotors.spinFor(reverse, 360, degrees, false);
+    Chassis.driveDistance(30, 0.1, 6, 0.001, 0.05);
+    wait(1, sec);
+    ClawPiston.set(true);
+
 
   /*drive Chassis(3.25, 4.0/3, 0, 0, 0, leftDrive, rightDrive, PORT1);
   Chassis.backwardsToPoint(0, 0, 0.25, 0.5, 0.01, 0.05, 0.25, 2, 0.05, 0.2);*/
@@ -81,8 +92,6 @@ void leftAuton() {
 
 
 void skillsAuton() {
-
-  drive Chassis(3.25, 5.0/3, 0, 0, 45, leftDrive, rightDrive, PORT1);
 
   //ten point
   /*drive Chassis(3.25, 4.0/3, 0, 0, 0, leftDrive, rightDrive, PORT1);
