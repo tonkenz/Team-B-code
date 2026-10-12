@@ -221,11 +221,17 @@ void usercontrol(void) {
       Lift2.stop(hold);
     }
 
-    if (Controller.ButtonA.pressing()){
-      ClawPiston.set(true);
-    }
-    else if (Controller.ButtonB.pressing()){
+    // if (Controller.ButtonA.pressing()){
+    //   ClawPiston.set(true);
+    // }
+    // else if (Controller.ButtonB.pressing()){
+    //   ClawPiston.set(false);
+    // }
+    if(Controller.ButtonA.pressing()){
       ClawPiston.set(false);
+    }
+    else{
+      ClawPiston.set(true);
     }
 
     // // ========== INTAKE ========== //
