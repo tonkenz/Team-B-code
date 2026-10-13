@@ -227,7 +227,7 @@ void usercontrol(void) {
     // else if (Controller.ButtonB.pressing()){
     //   ClawPiston.set(false);
     // }
-    if(Controller.ButtonA.pressing()){
+    if(Controller.ButtonR1.pressing()){
       ClawPiston.set(false);
     }
     else{
