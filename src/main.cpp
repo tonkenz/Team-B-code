@@ -157,8 +157,8 @@ void usercontrol(void) {
 
     // ========== DRIVE CONTROL ========== //
     //arcade drive control
-    double forward = Controller.Axis3.position() * 1; // forward/backward, change multiplier for sensitivity
-    double turn = Controller.Axis1.position() * 1;
+    double forward = Controller.Axis3.position() * 0.8; // forward/backward, change multiplier for sensitivity
+    double turn = Controller.Axis1.position() * 0.8;
     
     // tank drive control
     // double forward = (Controller.Axis3.position() + Controller.Axis2.position()) / 2; // forward/backward, change multiplier for sensitivity
