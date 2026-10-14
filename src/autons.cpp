@@ -62,8 +62,7 @@ void rightAuton() {
 
 void leftAuton() {
     drive Chassis(3.25, 4.0/3, leftDrive, rightDrive, LiftMotors, PORT14);
-
-// Chassis.driveDistance(-48, 0.25, 2, 0.01, 0.0005);
+//20 pionts
 drive Chassis(3.25, 4.0/3, leftDrive, rightDrive, LiftMotors, PORT14);
     lift lift(PORT10, PORT1, Brain.ThreeWirePort.H);
     Chassis.driveDistance(4, 0.1, 6, 0.001, 0.05);
@@ -76,7 +75,7 @@ drive Chassis(3.25, 4.0/3, leftDrive, rightDrive, LiftMotors, PORT14);
     Chassis.turnAngle(50, 0.5, 0.5, 0.001, 0);
     Chassis.driveDistance(37, 1, 2, 0.01, 0.1);
     ClawPiston.set(true);
-    
+    //hi
 //ten point x and y
   /*drive Chassis(3.25, 4.0/3, 0, 0, 0, leftDrive, rightDrive, PORT1);
   Chassis.backwardsToPoint(0, 0, 0.25, 0.5, 0.01, 0.05, 0.25, 2, 0.05, 0.2);*/
