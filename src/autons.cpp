@@ -7,10 +7,6 @@
 #include "drive.h"
 
 using namespace vex;
-//tuned PID
-//Chassis.driveDistance(24, 0.1, 6, 0.001, 0.05);
-//Chassis.driveDistance(-24, 0.1, 8.5, 0.001, 0.05);
-//Chassis.turnAngle(180, 0.25, 0.6, 0.001, 0.05);
 void rightAuton() {
   //20 point
     drive Chassis(3.25, 4.0/3, leftDrive, rightDrive, LiftMotors, PORT14);
@@ -18,12 +14,16 @@ void rightAuton() {
     Chassis.driveDistance(4, 0.1, 6, 0.001, 0.05);
     Chassis.driveDistance(-5, 0.1, 6, 0.001, 0.05);
     Chassis.driveDistance(5, 0.1, 6, 0.001, 0.05);
-    Chassis.driveDistance(-48, 0.25, 2, 0.001, 0.001);
-    Chassis.turnAngle(-50, 0.25, 2, 0.01, 0.0005);
-    // LiftMotors.setVelocity(100, percent);
-    // LiftMotors.spinFor(reverse, 300, degrees, false); 
-    Chassis.driveDistance(37, 0.1, 5, 0.001, 0.05);
-    ClawPiston.set(true);
+    
+
+
+
+    // Chassis.driveDistance(-48, 0.25, 2, 0.001, 0.001);
+    // Chassis.turnAngle(-50, 0.25, 2, 0.01, 0.0005);
+    // // LiftMotors.setVelocity(100, percent);
+    // // LiftMotors.spinFor(reverse, 300, degrees, false); 
+    // Chassis.driveDistance(37, 0.1, 5, 0.001, 0.05);
+    // ClawPiston.set(true);
     
     // Chassis.driveDistance(-5, 0.1, 5, 0.001, 0.05);
     // Chassis.turnAngle(-90, 0.5, 0.3, 0.001, 0.005);
@@ -64,7 +64,9 @@ void rightAuton() {
 void leftAuton() {
     drive Chassis(3.25, 4.0/3, leftDrive, rightDrive, LiftMotors, PORT14);
 
-Chassis.driveDistance(-48, 0.25, 2, 0.01, 0.0005);
+//Chassis.driveDistance(48, 1, 3.85 , 0.01, 0.05);    
+Chassis.driveDistance(48, 1, 2, 0, 0.1);    
+
             //ten point x and y
   /*drive Chassis(3.25, 4.0/3, 0, 0, 0, leftDrive, rightDrive, PORT1);
   Chassis.backwardsToPoint(0, 0, 0.25, 0.5, 0.01, 0.05, 0.25, 2, 0.05, 0.2);*/
