@@ -60,8 +60,9 @@ void rightAuton() {
 void leftAuton() {
     drive Chassis(3.25, 4.0/3, leftDrive, rightDrive, LiftMotors, PORT14);
 
-Chassis.driveDistance(-48, 0.25, 2, 0.01, 0.0005);
-            //ten point x and y
+// Chassis.driveDistance(-48, 0.25, 2, 0.01, 0.0005);
+Chassis.driveDistance(48, 1, 2, 0, 0.1);    
+//ten point x and y
   /*drive Chassis(3.25, 4.0/3, 0, 0, 0, leftDrive, rightDrive, PORT1);
   Chassis.backwardsToPoint(0, 0, 0.25, 0.5, 0.01, 0.05, 0.25, 2, 0.05, 0.2);*/
           //ten point pid
