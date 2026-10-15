@@ -117,7 +117,7 @@ Chassis.driveDistance(-5, 0.1, 6, 0.001, 0.05);
 Chassis.driveDistance(5, 0.1, 6, 0.001, 0.05);
 Chassis.driveDistance(-48, 1, 2, 0.01, 0.1);
 LiftMotors.setVelocity(100, percent);
-LiftMotors.spinFor(reverse, 600, degrees, false); 
+LiftMotors.spinFor(reverse, 400, degrees, false); 
 Chassis.turnAngle(50, 0.5, 0.5, 0.001, 0);
 Chassis.driveDistance(38, 1, 2, 0.01, 0.1);
 ClawPiston.set(true);
