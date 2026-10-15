@@ -228,10 +228,10 @@ void usercontrol(void) {
     //   ClawPiston.set(false);
     // }
     if(Controller.ButtonR1.pressing()){
-      ClawPiston.set(false);
+      ClawPiston.set(true);
     }
     else{
-      ClawPiston.set(true);
+      ClawPiston.set(false);
     }
 
     // // ========== INTAKE ========== //
