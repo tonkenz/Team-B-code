@@ -46,6 +46,7 @@ void rightAuton() {
     LiftMotors.spinFor(reverse, 400, degrees, false); 
     Chassis.turnAngle(-50, 0.5, 0.5, 0.001, 0);
     Chassis.driveDistance(37, 1, 2, 0.01, 0.1);
+     LiftMotors.spinFor(forward, 400, degrees, false); 
     ClawPiston.set(true);
 
     // Chassis.driveDistance(-5, 0.1, 5, 0.001, 0.05);
@@ -120,6 +121,7 @@ LiftMotors.setVelocity(100, percent);
 LiftMotors.spinFor(reverse, 400, degrees, false); 
 Chassis.turnAngle(50, 0.5, 0.5, 0.001, 0);
 Chassis.driveDistance(38, 1, 2, 0.01, 0.1);
+LiftMotors.spinFor(forward, 400, degrees, false); 
 ClawPiston.set(true);
 
 //ten point x and y
