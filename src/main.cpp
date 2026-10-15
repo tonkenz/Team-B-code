@@ -221,18 +221,19 @@ void usercontrol(void) {
       Lift2.stop(hold);
     }
 
-    // if (Controller.ButtonA.pressing()){
-    //   ClawPiston.set(true);
-    // }
-    // else if (Controller.ButtonB.pressing()){
-    //   ClawPiston.set(false);
-    // }
-    if(Controller.ButtonR1.pressing()){
+    if (Controller.ButtonR1.pressing()){
       ClawPiston.set(true);
     }
-    else{
+    else if (Controller.ButtonR2.pressing()){
       ClawPiston.set(false);
     }
+    
+    // if(Controller.ButtonR1.pressing()){
+    //   ClawPiston.set(false);
+    // }
+    // else{
+    //   ClawPiston.set(true);
+    // }
 
     // // ========== INTAKE ========== //
 
