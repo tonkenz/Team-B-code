@@ -144,9 +144,9 @@ Chassis.driveDistance(5, 0.1, 6, 0.001, 0.05);
 Chassis.driveDistance(-48, 1, 2, 0.01, 0.1);
 LiftMotors.setVelocity(100, percent);
 LiftMotors.spinFor(reverse, 700, degrees, false); 
-Chassis.turnAngle(48, 0.5, 0.5, 0.001, 0);
-Chassis.driveDistance(38, 1, 2, 0.01, 0.1);
-LiftMotors.spinFor(forward, 700, degrees, false); 
+Chassis.turnAngle(45, 0.5, 0.5, 0.001, 0);
+Chassis.driveDistance(40, 1, 2, 0.01, 0.1);
+LiftMotors.spinFor(forward, 700, degrees); 
 ClawPiston.set(true);
 /*
 
@@ -244,7 +244,7 @@ void skillsAuton() {
     
     
     */
-      drive Chassis(3.25, 4.0/3, leftDrive, rightDrive, LiftMotors, PORT14);
+    drive Chassis(3.25, 4.0/3, leftDrive, rightDrive, LiftMotors, PORT14);
     lift lift(PORT10, PORT1, Brain.ThreeWirePort.H);
     ClawPiston.set(false);
     Chassis.driveDistance(4, 0.1, 6, 0.001, 0.05);
@@ -255,25 +255,34 @@ void skillsAuton() {
     LiftMotors.spinFor(reverse, 600, degrees, false); 
     Chassis.turnAngle(-50, 0.5, 0.5, 0.001, 0);
     Chassis.driveDistance(37, 1, 1.9, 0.01, 0);
-    LiftMotors.spinFor(forward, 600, degrees); 
+    LiftMotors.spinFor(forward, 700, degrees); 
     ClawPiston.set(true);
     wait(0.5, seconds);
     Chassis.driveDistance(-12, 1, 1.9, 0.01, 0);
     Chassis.turnAngle(-37, 0.5, 0.5, 0.001, 0);
     Chassis.driveDistance(61, 1, 1.9, 0.01, 0);
-    Chassis.turnAngle (89, 0.5, 0.5, 0.001, 0);
-    Chassis.driveDistance(32, 1, 1.9, 0.01, 0);
+    Chassis.turnAngle (87, 0.5, 0.5, 0.001, 0);
+    Chassis.driveDistance(35, 1, 1.9, 0.01, 0);
     ClawPiston.set(false);
-     Chassis.driveDistance(-10, 1, 1.9, 0.01, 0);
-      LiftMotors.spinFor(forward, 600, degrees); 
+    Chassis.driveDistance(-10, 1, 1.9, 0.01, 0);
+    LiftMotors.spinFor(reverse, 900, degrees, false); 
     Chassis.turnAngle (-50, 0.5, 0.5, 0.001, 0);
     Chassis.driveDistance(-18, 1, 1.9, 0.01, 0);
     Chassis.turnAngle (140, 0.5, 0.5, 0.001, 0);
-    Chassis.driveDistance(-24, 1, 1.9, 0.01, 0);
+    Chassis.driveDistance(24, 1, 1.9, 0.01, 0);
+    LiftMotors.spinFor(forward, 500, degrees, false); 
+    ClawPiston.set(true);
     // Chassis.driveDistance(-30, 1, 2, 0.01, 0);
     // Chassis.turnAngle(-46, 0.5, 0.5, 0.001, 0);
     // Chassis.driveDistance(21, 1, 2, 0.01, 0);
-    // ClawPiston.set(false);
+    ClawPiston.set(false);  
+
+
+
+
+
+
+
   // drive Chassis(3.25, 4.0/3, leftDrive, rightDrive, LiftMotors, PORT14);
   //   lift lift(PORT10, PORT1, Brain.ThreeWirePort.H);
   //   Chassis.driveDistance(4, 0.1, 6, 0.001, 0.05);
